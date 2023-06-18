@@ -4,11 +4,14 @@ import dotenv from 'dotenv';
 import express from 'express'
 import http from "http"
 import { Server } from "socket.io"
+import cors from 'cors'
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
 dotenv.config();
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //configuration of cmd
 const userInterface = readline.createInterface({
@@ -37,17 +40,48 @@ io.on("connection", (socket) => {
     socket.on("userQuries", async (input) => {
         // note input will have {message,sessionId,topic}
         // suppose user is querying based on his previous response we will have to take care of it using session
+        //console.log(input)
         let res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: `First check this query ${input.message} is related to ${input.topic} or not, if it is not related then don't reply with the details for the user query. Otherwise provide some suggestions to that query within 100 words ` }]
+            messages: [{ role: "user", content: `Do you think topic "${input.message}" is related to "${input.topic}", just YES or No no other response` }]
         })
+        
+        let isValidQuery=res.data.choices[0].message.content.split(',')
+        //console.log(isValidQuery[0].toUpperCase(),'validating!!')
+        let data='sorry i dont have any context regarding this query..'
+        if(isValidQuery[0][0].toUpperCase()==='Y' && isValidQuery[0][1].toUpperCase()==='E' && isValidQuery[0][2].toUpperCase()==='S'){
+            let newres = await openai.createChatCompletion({
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: `${input.message}` }]
+            })
+            data=newres.data.choices[0].message.content
 
-        userQuriesStore[input.sessionId] = [...userQuriesStore[input.sessionId], { [input['message']]: res.data.choices[0].message.content }]
-
+        }
+        if (userQuriesStore[input.sessionId]) {
+                userQuriesStore[input.sessionId] = [...userQuriesStore[input.sessionId], { 'question':[input['message']],'response': data }]
+        }
+        else {
+                userQuriesStore[input.sessionId] = [{ 'question':[input['message']],'response': data }]
+        }
+    
         io.emit('queryResponse', { response: res.data.choices[0].message.content, sessionId: input.sessionId, entireChat: userQuriesStore[input.sessionId] })
+
+    })
+
+    socket.on('getuserQuries', async (input)=>{
+        io.emit('queryResponse', { response:null,sessionId:input.sessionId,entireChat: userQuriesStore[input.sessionId] })
     })
 })
-const Port = process.env.PORT ? process.env.PORT : 8080
+
+app.post("/clearConversation",(req,res)=>{
+    //console.log(req.body,'body logging')
+    const{sessionId}=req.body
+    if(userQuriesStore[sessionId]){
+        userQuriesStore[sessionId]=[]
+    }
+    res.send({response:null,sessionId:sessionId,entireChat: userQuriesStore[sessionId] })
+})
+const Port = process.env.PORT ? process.env.PORT : 3003
 
 server.listen(Port, () => {
     console.log("server started")
