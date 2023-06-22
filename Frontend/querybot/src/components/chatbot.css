@@ -24,7 +24,7 @@
     padding: 10px;
     background-color: #f8e896;
     color: #000;
-    width: 200px;
+    /* width: 200px; */
     height: auto;
     text-align: left;
     font: 400 .9em 'Open Sans', sans-serif;
@@ -35,6 +35,7 @@
     padding: 0;
     margin: 0;
     margin-bottom: 15px;
+    text-align: justify;
 }
 
 .message-blue {
@@ -44,7 +45,7 @@
     padding: 10px;
     color:#040f38;
     background-color: #A8DDFD;
-    width: 200px;
+    /* width: 200px; */
     height: auto;
     text-align: left;
     font: 400 .9em 'Open Sans', sans-serif;
