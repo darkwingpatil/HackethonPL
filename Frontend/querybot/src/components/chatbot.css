@@ -151,3 +151,129 @@
   }
 }
 
+
+#chatbot-container {
+  position: fixed;
+  bottom: 20px; /* Adjust this value to position the chatbot vertically */
+  right: 20px; /* Adjust this value to position the chatbot horizontally */
+  z-index: 9999; /* Adjust the z-index to make sure it's on top of other elements */
+  cursor: pointer;
+}
+
+#chatbot-icon {
+  width: 60px; /* Adjust the size of the icon as needed */
+  height: 60px; /* Adjust the size of the icon as needed */
+  border-radius: 50%;
+  background-color: #00bfa5; /* Adjust the background color as needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26); /* Add a shadow effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chatbot-icon img {
+  width: 40px; /* Adjust the size of the icon image as needed */
+  height: 40px; /* Adjust the size of the icon image as needed */
+}
+
+.chatbot-container {
+  position: relative;
+}
+
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #00bfa5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.chatbox {
+  position: absolute;
+  bottom: 100px; /* Adjust this value to position the chatbox */
+  right: 20px;
+  width: 400px; /* Adjust the width of the chatbox */
+  min-height: 200px; /* Adjust the height of the chatbox */
+  background-color: #f1f1f1; /* Adjust the background color of the chatbox */
+  border: 1px solid #ccc; /* Add a border to the chatbox */
+  border-radius: 5px;
+  z-index: 9998;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chatbox.open {
+  transform: translateY(0);
+}
+
+.pando-input-wrapper {
+  position: relative;
+}
+
+.pando-input {
+  padding-right: 30px;
+  color: black;
+  margin: 0 10px 10px 10px;
+  width: 380px;
+}
+
+.icon {
+  position: absolute;
+  bottom: -1%;
+  right: 15px; /* Adjust the distance of the icon from the right side */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.icon img {
+  display: block;
+  width: 40px; /* Adjust the size of the icon */
+  height: 40px; /* Adjust the size of the icon */
+}
+
+.chatbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  background-color: rgb(236, 0, 140);
+  padding: 0 10px;
+  color: white;
+}
+
+.chatbox-header-icon {
+  display: flex;
+  align-items: center;
+}
+
+.chatbox-header-username {
+  margin-left: 10px;
+}
+
+.chatbox-header-close-icon {
+  cursor: pointer;
+}
+
+.chatbox-content {
+  height: calc(100% - 50px);
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.chatbox-header-image {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+}
