@@ -5,8 +5,9 @@ import {
   unsafe_CircularProgress as CircularProgress,
 } from "@pluralsight/react";
 import InfiniteScroll from "react-infinite-scroll-component";
-
 import { io } from "socket.io-client";
+
+import { ProfileSkeleton } from "./ProfileSkeleton";
 import logo from "./chatbot.svg";
 import search from "./search.svg";
 
@@ -159,12 +160,6 @@ function Chatbot() {
                 </h3>
               }
             >
-              {!buttonSwitcher && (
-                <CircularProgress
-                  ariaLabel="Loading data"
-                  kind="indeterminate"
-                />
-              )}
               {aiResponse &&
                 aiResponse.entireChat &&
                 aiResponse.entireChat.map((el, index) => (
@@ -181,6 +176,8 @@ function Chatbot() {
                     }
                   </div>
                 ))}
+
+              {!buttonSwitcher && <ProfileSkeleton />}
             </InfiniteScroll>
           </div>
           <FormControlProvider style={{ padding: "10px" }}>
