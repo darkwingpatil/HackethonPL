@@ -181,6 +181,12 @@
   position: relative;
 }
 
+
+.code {
+  color: #fff;
+  font-size: 10px;
+}
+
 .chatbot-icon {
   position: fixed;
   bottom: 20px;
@@ -230,7 +236,7 @@
 
 .icon {
   position: absolute;
-  bottom: -1%;
+  bottom: -3%;
   right: 15px; /* Adjust the distance of the icon from the right side */
   transform: translateY(-50%);
   cursor: pointer;

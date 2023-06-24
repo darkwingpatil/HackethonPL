@@ -5,7 +5,7 @@ import express from 'express'
 import http from "http"
 import { Server } from "socket.io"
 import cors from 'cors'
-import {getLabidentity} from './Repositary/connection'
+import {getLabidentity} from './Repositary/connection.js'
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
@@ -59,6 +59,7 @@ io.on("connection", (socket) => {
     let isValidQuery = res.data.choices[0].message.content.split(",");
     //console.log(isValidQuery[0].toUpperCase(),'validating!!')
     let data = "sorry i dont have any context regarding this query..";
+    let iscode=[]
     if (
       isValidQuery[0][0].toUpperCase() === "Y" &&
       isValidQuery[0][1].toUpperCase() === "E" &&
@@ -69,15 +70,25 @@ io.on("connection", (socket) => {
         messages: [{ role: "user", content: `${input.message}` }],
       });
       data = newres.data.choices[0].message.content;
+
+      if(data.split("```").length>1){
+        iscode=data.split("```")
+        // console.log(iscode,'intially')
+        // iscode.shift()
+        // console.log(iscode,'after shift')
+        // iscode.pop()
+        // console.log(iscode,'after pop')
+      }
+
     }
     if (userQuriesStore[input.sessionId]) {
       userQuriesStore[input.sessionId] = [
         ...userQuriesStore[input.sessionId],
-        { question: [input["message"]], response: data },
+        { question: [input["message"]], response: data,iscode:iscode },
       ];
     } else {
       userQuriesStore[input.sessionId] = [
-        { question: [input["message"]], response: data },
+        { question: [input["message"]], response: data ,iscode:iscode},
       ];
     }
 

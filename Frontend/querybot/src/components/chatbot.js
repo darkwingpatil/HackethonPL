@@ -14,6 +14,18 @@ import search from "./search.svg";
 import "./chatbot.css";
 import "../App.css";
 
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+// Import the necessary language syntax
+import { jsx, python, java } from 'react-syntax-highlighter/dist/esm/languages/prism';
+
+SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('python', python);
+SyntaxHighlighter.registerLanguage('java', java);
+
+// Register more languages as needed
+
 const userhandle = "wing_test123";
 
 function Chatbot() {
@@ -90,6 +102,10 @@ function Chatbot() {
     });
     setValue("");
   };
+
+  const handleCopyCode=(codes)=>{
+    navigator.clipboard.writeText(codes)
+  }
 
   return (
     <div className="App">
@@ -169,9 +185,38 @@ function Chatbot() {
                         <div className="message-orange">
                           <p className="message-content">{el.question}</p>
                         </div>
-                        <div className="message-blue">
-                          <p className="message-content">{el.response}</p>
-                        </div>
+                        {
+                          //we are rendering this if there is an code
+                          //we used react-syntax-highlighte for formatting the code
+                          el.iscode && el.iscode.length > 0 ?
+                            <div >
+                              {
+                                el.iscode.map((codes,ind) =>
+                                (
+                                  <>
+                                  {
+                                    ind===0 || ind===el.iscode.length-1?
+                                    <div className="message-blue">
+                                      <p className="message-content">{codes}</p>
+                                    </div>:
+                                    <>
+                                      <button onClick={()=>handleCopyCode(codes)} className='copy-code'>Copy Code</button>
+                                      <SyntaxHighlighter language="auto" style={vscDarkPlus} className='code-textor'>
+                                        {codes}
+                                      </SyntaxHighlighter>
+                                    </>
+                                  }
+                                  </>                                
+                                )
+                                )
+                              }
+                            </div>
+                            :
+                            <div className="message-blue">
+                              <p className="message-content">{el.response}</p>
+                            </div>
+                        }
+
                       </>
                     }
                   </div>
