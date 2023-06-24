@@ -7,9 +7,9 @@ dotenv.config();
 
 
 const config = {
-  user: 'channels_admin',
-  password: 'yA647r(243Y',
-  host:'channels-rds.eplur-staging.vnerd.com' ,
+  user: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD,
+  host:process.env.POSTGRES_HOST ,
   port: 5432,
   database:'postgres'
 };
