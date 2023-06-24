@@ -5,6 +5,7 @@ import express from 'express'
 import http from "http"
 import { Server } from "socket.io"
 import cors from 'cors'
+import {getLabidentity} from './Repositary/connection'
 const app = express()
 const server = http.createServer(app)
 const io = new Server(server)
@@ -12,6 +13,7 @@ dotenv.config();
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 //configuration of cmd
 const userInterface = readline.createInterface({
@@ -30,6 +32,9 @@ const openai = new OpenAIApi(
 // we can use MongoDb HERE
 var userQuriesStore = {}
 
+// sessionId: user_hanlde+lab_id
+
+
 //this will have some thing like this format
 // userQuriesStore={'session_id':[{'question':'ai response'}]}
 
@@ -41,6 +46,9 @@ io.on("connection", (socket) => {
         // note input will have {message,sessionId,topic}
         // suppose user is querying based on his previous response we will have to take care of it using session
         //console.log(input)
+
+        //let topic=await getLabidentity(input.id)
+
         let res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: `Do you think topic "${input.message}" is related to "${input.topic}", just YES or No no other response` }]
