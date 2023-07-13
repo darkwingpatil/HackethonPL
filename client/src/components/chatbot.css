@@ -21,15 +21,22 @@
   position: relative;
   margin-bottom: 10px;
   margin-left: calc(100% - 240px);
+  /* margin-left: calc(100% - 240px); */
   padding: 10px;
   background-color: #f8e896;
   color: #000;
+  background-color: #0084BD;
+  color: #ffffff;
   /* width: 200px; */
   height: auto;
   text-align: left;
   font: 400 .9em 'Open Sans', sans-serif;
+  /* font: 400 .9em 'Open Sans', sans-serif; */
   border: 1px solid #dfd087;
   border-radius: 10px;
+  border-radius: 33px;
+  font-size: 14px;
+  display: inline-block;
 }
 .message-content {
   padding: 0;
@@ -41,17 +48,22 @@
 .message-blue {
   position: relative;
   margin-left: 20px;
+  /* margin-left: 20px; */
   margin-bottom: 10px;
   padding: 10px;
   color:#040f38;
   background-color: #A8DDFD;
+  background-color: #ffffff;
   /* width: 200px; */
   height: auto;
   text-align: left;
   font: 400 .9em 'Open Sans', sans-serif;
+  /* font: 400 .9em 'Open Sans', sans-serif; */
   border: 1px solid hsl(203, 58%, 74%);
   border-radius: 10px;
+  border-radius: 16px;
   overflow: scroll;
+  font-size: 14px;
 }
 
 .message-blue::-webkit-scrollbar {
@@ -213,7 +225,7 @@ bottom: 100px; /* Adjust this value to position the chatbox */
 right: 20px;
 width: 400px; /* Adjust the width of the chatbox */
 min-height: 200px; /* Adjust the height of the chatbox */
-background-color: #f1f1f1; /* Adjust the background color of the chatbox */
+background-color: #E8ECF2; /* Adjust the background color of the chatbox */
 border: 1px solid #ccc; /* Add a border to the chatbox */
 border-radius: 5px;
 z-index: 9998;
