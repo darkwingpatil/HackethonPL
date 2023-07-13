@@ -1,0 +1,6 @@
+environment
+dist
+node_modules
+scripts
+.git
+docker.env

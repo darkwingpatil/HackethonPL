@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  slai_server:
+    build: .
+    entrypoint: /bin/sh './scripts/slai-node-dev.sh'
+    restart: always
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules

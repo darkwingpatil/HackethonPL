@@ -82,7 +82,7 @@ function Chatbot() {
     //   return () => {
     //     socket.disconnect();
     //   }
-  }, []);
+  },[]);
 
   const fetchMoreData = () => {
     //does nothing
@@ -95,9 +95,9 @@ function Chatbot() {
 
   const handleSubmit = () => {
     setButtonSwitcher(false);
-    socket.emit("userQuries", {
-      message: value,
-      topic: "aws",
+    socket.emit("userQuery", {
+      query: value,
+      courseId: "62473215-caf6-4efe-8996-decbc94b8400",
       sessionId: userhandle,
     });
     setValue("");
@@ -105,6 +105,13 @@ function Chatbot() {
 
   const handleCopyCode=(codes)=>{
     navigator.clipboard.writeText(codes)
+  }
+
+  if(aiResponse && aiResponse.response && aiResponse.response==="QueryNotFound")
+  {
+    return <div>
+      <h1>Invalid course Selected</h1>
+    </div>
   }
 
   return (
@@ -235,7 +242,8 @@ function Chatbot() {
               value={value}
               onChange={(event) => setValue(event.target.value)}
             />
-            <div className="icon" onClick={handleSubmit}>
+            <div className={aiResponse &&
+                 aiResponse.entireChat && aiResponse.entireChat.length>1 ?"icon_after":"icon_before"} onClick={handleSubmit}>
               <img src={search} alt="Search Icon" />
             </div>
           </FormControlProvider>
