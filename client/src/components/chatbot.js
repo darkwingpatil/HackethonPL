@@ -10,6 +10,7 @@ import { io } from "socket.io-client";
 import { ProfileSkeleton } from "./ProfileSkeleton";
 // import logo from "./chatbot.svg";
 import logo from "./chatlogo.png";
+import labBackground from "./labBackground.png";
 
 import search from "./submit.svg";
 
@@ -127,6 +128,7 @@ function Chatbot() {
 
   return (
     <div className="App">
+      <img src={labBackground} alt="Search Icon" />
       <div id="chatbot-container">
         <div id="chatbot-icon" onClick={toggleChatbox}>
           <img src={logo} alt="Chatbot Icon" />

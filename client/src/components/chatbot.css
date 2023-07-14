@@ -1,3 +1,19 @@
+html {
+  background-image: none;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
 .chat-bot{
   border:1px solid white;
   border-radius: 20px;
