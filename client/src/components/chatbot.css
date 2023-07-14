@@ -20,20 +20,15 @@
 .message-orange {
   position: relative;
   margin-bottom: 10px;
-  margin-left: calc(100% - 240px);
   /* margin-left: calc(100% - 240px); */
   padding: 10px;
-  background-color: #f8e896;
-  color: #000;
   background-color: #0084BD;
   color: #ffffff;
   /* width: 200px; */
   height: auto;
   text-align: left;
-  font: 400 .9em 'Open Sans', sans-serif;
   /* font: 400 .9em 'Open Sans', sans-serif; */
   border: 1px solid #dfd087;
-  border-radius: 10px;
   border-radius: 33px;
   font-size: 14px;
   display: inline-block;
@@ -41,33 +36,25 @@
 .message-content {
   padding: 0;
   margin: 0;
-  margin-bottom: 15px;
-  text-align: justify;
+  /* margin-bottom: 15px; */
+  /* text-align: justify; */
 }
 
 .message-blue {
   position: relative;
-  margin-left: 20px;
   /* margin-left: 20px; */
   margin-bottom: 10px;
   padding: 10px;
   color:#040f38;
-  background-color: #A8DDFD;
   background-color: #ffffff;
   /* width: 200px; */
   height: auto;
   text-align: left;
-  font: 400 .9em 'Open Sans', sans-serif;
   /* font: 400 .9em 'Open Sans', sans-serif; */
   border: 1px solid hsl(203, 58%, 74%);
-  border-radius: 10px;
   border-radius: 16px;
   overflow: scroll;
   font-size: 14px;
-}
-
-.message-blue::-webkit-scrollbar {
-  display: none;
 }
 
 .message-input{
@@ -181,7 +168,6 @@ cursor: pointer;
 width: 60px; /* Adjust the size of the icon as needed */
 height: 60px; /* Adjust the size of the icon as needed */
 border-radius: 50%;
-background-color: #00bfa5; /* Adjust the background color as needed */
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26); /* Add a shadow effect */
 display: flex;
 justify-content: center;
@@ -195,12 +181,6 @@ height: 40px; /* Adjust the size of the icon image as needed */
 
 .chatbot-container {
 position: relative;
-}
-
-
-.code {
-color: #fff;
-font-size: 10px;
 }
 
 .chatbot-icon {
@@ -221,7 +201,7 @@ cursor: pointer;
 
 .chatbox {
 position: absolute;
-bottom: 100px; /* Adjust this value to position the chatbox */
+bottom: 80px; /* Adjust this value to position the chatbox */
 right: 20px;
 width: 400px; /* Adjust the width of the chatbox */
 min-height: 200px; /* Adjust the height of the chatbox */
@@ -251,24 +231,24 @@ width: 380px;
 }
 
 .icon_after {
-position: absolute;
-bottom: -3%;
-right: 15px; /* Adjust the distance of the icon from the right side */
-transform: translateY(-50%);
-cursor: pointer;
-}
-
-.icon_before {
   position: absolute;
-  bottom: 0.5%;
+  bottom: -3%;
   right: 15px; /* Adjust the distance of the icon from the right side */
   transform: translateY(-50%);
   cursor: pointer;
   }
+  
+  .icon_before {
+    position: absolute;
+    bottom: 4.5%;
+    right: 15px; /* Adjust the distance of the icon from the right side */
+    transform: translateY(-50%);
+    cursor: pointer;
+    }
 
 .icon img {
 display: block;
-width: 40px; /* Adjust the size of the icon */
+width: 30px; /* Adjust the size of the icon */
 height: 40px; /* Adjust the size of the icon */
 }
 
@@ -277,9 +257,9 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 height: 50px;
-background-color: rgb(236, 0, 140);
+background-color: #ffffff;
 padding: 0 10px;
-color: white;
+color: #000000;
 }
 
 .chatbox-header-icon {
@@ -299,6 +279,7 @@ cursor: pointer;
 height: calc(100% - 50px);
 padding: 10px;
 overflow-y: auto;
+text-align: end;
 }
 
 .chatbox-header-image {
@@ -307,4 +288,15 @@ height: 28px;
 border-radius: 50%;
 overflow: hidden;
 background: #fff;
+}
+
+.chatbox-faqQuestion {
+background: white;
+margin: 10px;
+border-radius: 13px;
+display: inline-block;
+float: left;
+text-align: left;
+padding: 10px;
+color: black;
 }

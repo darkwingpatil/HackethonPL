@@ -8,21 +8,27 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { io } from "socket.io-client";
 
 import { ProfileSkeleton } from "./ProfileSkeleton";
-import logo from "./chatbot.svg";
-import search from "./search.svg";
+// import logo from "./chatbot.svg";
+import logo from "./chatlogo.png";
+
+import search from "./submit.svg";
 
 import "./chatbot.css";
 import "../App.css";
 
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 // Import the necessary language syntax
-import { jsx, python, java } from 'react-syntax-highlighter/dist/esm/languages/prism';
+import {
+  jsx,
+  python,
+  java,
+} from "react-syntax-highlighter/dist/esm/languages/prism";
 
-SyntaxHighlighter.registerLanguage('jsx', jsx);
-SyntaxHighlighter.registerLanguage('python', python);
-SyntaxHighlighter.registerLanguage('java', java);
+SyntaxHighlighter.registerLanguage("jsx", jsx);
+SyntaxHighlighter.registerLanguage("python", python);
+SyntaxHighlighter.registerLanguage("java", java);
 
 // Register more languages as needed
 
@@ -82,7 +88,7 @@ function Chatbot() {
     //   return () => {
     //     socket.disconnect();
     //   }
-  },[]);
+  }, []);
 
   const fetchMoreData = () => {
     //does nothing
@@ -103,15 +109,20 @@ function Chatbot() {
     setValue("");
   };
 
-  const handleCopyCode=(codes)=>{
-    navigator.clipboard.writeText(codes)
-  }
+  const handleCopyCode = (codes) => {
+    navigator.clipboard.writeText(codes);
+  };
 
-  if(aiResponse && aiResponse.response && aiResponse.response==="QueryNotFound")
-  {
-    return <div>
-      <h1>Invalid course Selected</h1>
-    </div>
+  if (
+    aiResponse &&
+    aiResponse.response &&
+    aiResponse.response === "QueryNotFound"
+  ) {
+    return (
+      <div>
+        <h1>Invalid course Selected</h1>
+      </div>
+    );
   }
 
   return (
@@ -195,35 +206,40 @@ function Chatbot() {
                         {
                           //we are rendering this if there is an code
                           //we used react-syntax-highlighte for formatting the code
-                          el.iscode && el.iscode.length > 0 ?
-                            <div >
-                              {
-                                el.iscode.map((codes,ind) =>
-                                (
-                                  <>
-                                  {
-                                    ind===0 || ind===el.iscode.length-1?
+                          el.iscode && el.iscode.length > 0 ? (
+                            <div>
+                              {el.iscode.map((codes, ind) => (
+                                <>
+                                  {ind === 0 || ind === el.iscode.length - 1 ? (
                                     <div className="message-blue">
                                       <p className="message-content">{codes}</p>
-                                    </div>:
+                                    </div>
+                                  ) : (
                                     <>
-                                      <button onClick={()=>handleCopyCode(codes)} className='copy-code'>Copy Code</button>
-                                      <SyntaxHighlighter language="auto" style={vscDarkPlus} className='code-textor'>
+                                      <button
+                                        onClick={() => handleCopyCode(codes)}
+                                        className="copy-code"
+                                      >
+                                        Copy Code
+                                      </button>
+                                      <SyntaxHighlighter
+                                        language="auto"
+                                        style={vscDarkPlus}
+                                        className="code-textor"
+                                      >
                                         {codes}
                                       </SyntaxHighlighter>
                                     </>
-                                  }
-                                  </>                                
-                                )
-                                )
-                              }
+                                  )}
+                                </>
+                              ))}
                             </div>
-                            :
+                          ) : (
                             <div className="message-blue">
                               <p className="message-content">{el.response}</p>
                             </div>
+                          )
                         }
-
                       </>
                     }
                   </div>
@@ -237,13 +253,21 @@ function Chatbot() {
               describedBy="email:help"
               id="askHere"
               name="askHere"
-              placeholder="Ask here"
+              placeholder="Ask your question here"
               type="text"
               value={value}
               onChange={(event) => setValue(event.target.value)}
             />
-            <div className={aiResponse &&
-                 aiResponse.entireChat && aiResponse.entireChat.length>1 ?"icon_after":"icon_before"} onClick={handleSubmit}>
+            <div
+              className={
+                aiResponse &&
+                aiResponse.entireChat &&
+                aiResponse.entireChat.length > 1
+                  ? "icon_after"
+                  : "icon_before"
+              }
+              onClick={handleSubmit}
+            >
               <img src={search} alt="Search Icon" />
             </div>
           </FormControlProvider>
