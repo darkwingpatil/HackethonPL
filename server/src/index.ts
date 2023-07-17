@@ -47,16 +47,46 @@ const openai = new OpenAIApi(
   })
 );
 
+
+const initalQuery=async(title:string,description:string)=>{
+  const { data } = await openai.createChatCompletion(
+    {
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: `Your task is to find top topics from a text.
+          Make each item one or two words long.
+          Format your response as a list of items separated by commas.
+          Text: "${title}. ${description}" `
+        },
+      ],
+    },
+    {
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false,
+      }),
+    }
+  );
+  const currentMessage = data.choices[0];
+  const { content }: any = currentMessage.message;
+  return content
+}
+
+// maintaing the context here
+
 const topicMap: any = {
   "123": "AWS Lambda hands-on",
 };
 
 const userQuriesStore:any = {};
 
+const contextMessages:any=[];
+
 io.on("connection", (socket) => {
   console.log("User connected");
 
-  socket.on("userQuery", async ({ sessionId, query, courseId }) => {
+  socket.on("userQuery", async ({ sessionId, query, courseId,firstQuery=false }) => {
     console.log(`Querying >>> ${query}`);
 
     // if (!topicMap[courseId]) {
@@ -65,8 +95,9 @@ io.on("connection", (socket) => {
     // }
 
     // const topicName = topicMap[courseId];
-    //console.log(courseId,"logging course id")
-    let getTopicName:any=await getLabidentity(courseId)
+    // console.log(courseId,"logging course id")
+    const getTopicName:any=await getLabidentity(courseId)
+    console.log("what is coming from db",getTopicName)
 
     if (getTopicName.platform==undefined) {
       console.error("Course Not found");
@@ -78,6 +109,14 @@ io.on("connection", (socket) => {
       console.error("Course Not found");
       return;
     }
+
+    const listofOutput=await initalQuery(getTopicName.title,getTopicName.description)
+    console.log('logging what can it return',listofOutput)
+
+    const list=listofOutput.split(",")
+    const scopeToBeMaintained=[...list,getTopicName.platform]
+    console.log(scopeToBeMaintained,"logg our list of scopes")
+
     // console.log(getTopicName,"logging the topic name")
     const topicName=getTopicName.platform
 
@@ -87,7 +126,7 @@ io.on("connection", (socket) => {
         messages: [
           {
             role: "user",
-            content: `Do you think topic "${query}" is related to "${topicName}", just YES or No no other response`
+            content: `Do you think topic "${query}" is related to any of this "${scopeToBeMaintained[0]?scopeToBeMaintained[0]:""} OR ${scopeToBeMaintained[1]?scopeToBeMaintained[1]:""} OR ${scopeToBeMaintained[2]?scopeToBeMaintained[2]:""} OR ${scopeToBeMaintained[3]?scopeToBeMaintained[3]:""} OR ${scopeToBeMaintained[4]?scopeToBeMaintained[4]:""} OR ${scopeToBeMaintained[5]?scopeToBeMaintained[5]:""} OR ${scopeToBeMaintained[6]?scopeToBeMaintained[6]:""} OR ${scopeToBeMaintained[7]?scopeToBeMaintained[7]:""} OR ${scopeToBeMaintained[8]?scopeToBeMaintained[8]:""} OR ${scopeToBeMaintained[9]?scopeToBeMaintained[9]:""}", just YES or No no other response`
           },
         ],
       },
@@ -99,7 +138,7 @@ io.on("connection", (socket) => {
     );
 
     const isValidQuery:any =  data.choices[0].message && data.choices[0].message.content && data.choices[0].message.content.split(",");
-
+    console.log(isValidQuery,"sasasa")
     let response:string = "sorry i dont have any context regarding this query..";
     let iscode:[]|String[]=[]
     if (
@@ -157,6 +196,6 @@ app.post("/clearConversation", (req, res) => {
   });
 });
 
-httpServer.listen(port, () => {
-  console.log(`Seamless learning listening on port http://localhost:${port}`);
+httpServer.listen(3003, () => {
+  console.log(`Seamless learning listening on port http://localhost:${3003}`);
 });
