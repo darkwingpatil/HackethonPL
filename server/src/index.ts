@@ -47,6 +47,12 @@ const openai = new OpenAIApi(
   })
 );
 
+let contextMessages:any=[];
+
+type ContextType={
+  'role':'user'|'system',
+  'content':string
+}
 
 const initalQuery=async(title:string,description:string)=>{
   const { data } = await openai.createChatCompletion(
@@ -75,13 +81,32 @@ const initalQuery=async(title:string,description:string)=>{
 
 // maintaing the context here
 
+const get_completion=async(query:string)=>{
+  const {data} = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: `${query}` }],
+  });
+  return data
+}
+
+const get_completion_from_messages=async(messages:ContextType[])=>{
+  const {data} = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages,
+  });
+
+  return data
+}
+
+
+
 const topicMap: any = {
   "123": "AWS Lambda hands-on",
 };
 
 const userQuriesStore:any = {};
 
-const contextMessages:any=[];
+
 
 io.on("connection", (socket) => {
   console.log("User connected");
@@ -116,50 +141,65 @@ io.on("connection", (socket) => {
     const list=listofOutput.split(",")
     const scopeToBeMaintained=[...list,getTopicName.platform]
     console.log(scopeToBeMaintained,"logg our list of scopes")
+    const formattedLists = JSON.stringify(scopeToBeMaintained)
 
     // console.log(getTopicName,"logging the topic name")
     const topicName=getTopicName.platform
 
-    const { data } = await openai.createChatCompletion(
-      {
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content: `Do you think topic "${query}" is related to any of this "${scopeToBeMaintained[0]?scopeToBeMaintained[0]:""} OR ${scopeToBeMaintained[1]?scopeToBeMaintained[1]:""} OR ${scopeToBeMaintained[2]?scopeToBeMaintained[2]:""} OR ${scopeToBeMaintained[3]?scopeToBeMaintained[3]:""} OR ${scopeToBeMaintained[4]?scopeToBeMaintained[4]:""} OR ${scopeToBeMaintained[5]?scopeToBeMaintained[5]:""} OR ${scopeToBeMaintained[6]?scopeToBeMaintained[6]:""} OR ${scopeToBeMaintained[7]?scopeToBeMaintained[7]:""} OR ${scopeToBeMaintained[8]?scopeToBeMaintained[8]:""} OR ${scopeToBeMaintained[9]?scopeToBeMaintained[9]:""}", just YES or No no other response`
-          },
-        ],
-      },
-      {
-        httpsAgent: new https.Agent({
-          rejectUnauthorized: false,
-        }),
-      }
-    );
 
-    const isValidQuery:any =  data.choices[0].message && data.choices[0].message.content && data.choices[0].message.content.split(",");
-    console.log(isValidQuery,"sasasa")
-    let response:string = "sorry i dont have any context regarding this query..";
+
+    
+  
+    let response:string;
     let iscode:[]|String[]=[]
-    if (
-      isValidQuery[0][0].toUpperCase() === "Y" &&
-      isValidQuery[0][1].toUpperCase() === "E" &&
-      isValidQuery[0][2].toUpperCase() === "S"
-    ) {
-      const {data} = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: `${query}` }],
-      });
 
-      const currentMessage = data.choices[0];
+      let data1;
+      if(contextMessages.length>0)
+      {
+        contextMessages=[...contextMessages,{'role':'user', 'content':query}]
+        data1=await get_completion_from_messages(contextMessages)
+      }
+      else
+      {
+        contextMessages=[...contextMessages,{'role':'user', 'content':query}]
+        data1 = await get_completion(query)
+      }
+      const currentMessage = data1.choices[0];
       const { content }: any = currentMessage.message;
       response = content
+      let donotchangeRes=response
+      contextMessages=[...contextMessages,{'role':'assistant', 'content':response}]
 
       if(response.split("```").length>1){
         iscode=response.split("```")
       }
 
-    }
+      const { data } = await openai.createChatCompletion(
+        {
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "user",
+              content: `Do you think the context "${donotchangeRes}" is related to any of these lists: ${formattedLists}?, just YES or No no other response`
+            },
+          ],
+        },
+        {
+          httpsAgent: new https.Agent({
+            rejectUnauthorized: false,
+          }),
+        }
+      );
+
+      const isValidQuery:any =  data.choices[0].message && data.choices[0].message.content && data.choices[0].message.content.split(",");
+      console.log(isValidQuery,"sasasa")
+      if (
+        isValidQuery[0][0].toUpperCase() === "N" &&
+        isValidQuery[0][1].toUpperCase() === "O"
+      ) {
+        response = "sorry i dont have any context regarding this query..";
+      }
+
     if (userQuriesStore[sessionId]) {
       userQuriesStore[sessionId] = [
         ...userQuriesStore[sessionId],
