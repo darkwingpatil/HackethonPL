@@ -1,0 +1,1 @@
+export { PrimaryMediumIcon } from "./PrimaryMediumIcon";

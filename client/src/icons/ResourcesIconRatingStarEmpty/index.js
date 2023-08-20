@@ -1,0 +1,1 @@
+export { ResourcesIconRatingStarEmpty } from "./ResourcesIconRatingStarEmpty";

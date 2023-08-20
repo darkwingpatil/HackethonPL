@@ -1,0 +1,307 @@
+.code-lab-list {
+  background-color: #130f25;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.code-lab-list .div {
+  background-color: #130f25;
+  border: 1px none;
+  height: 982px;
+  position: relative;
+  width: 1512px;
+}
+
+.code-lab-list .title {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 22px;
+  left: 55px;
+  position: absolute;
+  top: 65px;
+}
+
+.code-lab-list .text-wrapper {
+  color: #ffffff;
+  font-family: "PS TT Commons-Bold", Helvetica;
+  font-size: 36px;
+  font-weight: 700;
+  height: 57px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: 442px;
+}
+
+.code-lab-list .text-wrapper-2 {
+  color: #ffffff;
+  font-family: var(--headings-heading-4-font-family);
+  font-size: var(--headings-heading-4-font-size);
+  font-style: var(--headings-heading-4-font-style);
+  font-weight: var(--headings-heading-4-font-weight);
+  left: 56px;
+  letter-spacing: var(--headings-heading-4-letter-spacing);
+  line-height: var(--headings-heading-4-line-height);
+  position: absolute;
+  top: 142px;
+  white-space: nowrap;
+  width: 473px;
+}
+
+.code-lab-list .list {
+  box-shadow: 0px -1px 0px #404376;
+  height: 164px;
+  left: 57px;
+  position: absolute;
+}
+
+.code-lab-list .overlap {
+  height: 164px;
+  position: relative;
+  width: 1366px;
+}
+
+.code-lab-list .group {
+  background-color: #130f25;
+  height: 164px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1366px;
+}
+
+.code-lab-list .overlap-group {
+  height: 84px;
+  left: 0;
+  position: absolute;
+  top: 24px;
+  width: 766px;
+}
+
+.code-lab-list .group-2 {
+  height: 84px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 766px;
+  text-align: initial;
+}
+
+.code-lab-list .p {
+  color: #ffffff;
+  font-family: "PS TT Commons-DemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 136px;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: absolute;
+  top: 21px;
+  white-space: nowrap;
+  width: 620px;
+}
+
+.code-lab-list .text-wrapper-3 {
+  color: #a5aacf;
+  font-family: var(--paragraph-small-font-family);
+  font-size: var(--paragraph-small-font-size);
+  font-style: var(--paragraph-small-font-style);
+  font-weight: var(--paragraph-small-font-weight);
+  left: 137px;
+  letter-spacing: var(--paragraph-small-letter-spacing);
+  line-height: var(--paragraph-small-line-height);
+  position: absolute;
+  top: 48px;
+  white-space: nowrap;
+  width: 625px;
+}
+
+.code-lab-list .mask-group {
+  height: 84px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 113px;
+}
+
+.code-lab-list .overlap-group-wrapper {
+  height: 84px;
+}
+
+.code-lab-list .overlap-group-2 {
+  height: 84px;
+  position: relative;
+  width: 113px;
+}
+
+.code-lab-list .rectangle {
+  background-color: var(--palette-blue10);
+  height: 66px;
+  left: 1px;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  width: 87px;
+}
+
+.code-lab-list .labs-wrapper {
+  background-image: url(../../static/img/ellipse-104.svg);
+  background-size: 100% 100%;
+  height: 48px;
+  left: 32px;
+  position: absolute;
+  top: 18px;
+  width: 48px;
+}
+
+.code-lab-list .frame {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 8px;
+  left: 136px;
+  position: absolute;
+  top: 0;
+}
+
+.code-lab-list .text-wrapper-4 {
+  color: #a5aacf;
+  font-family: "PS TT Commons-DemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 16px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.code-lab-list .start-lab {
+  background-color: #0074ab !important;
+  left: 1246px !important;
+  position: absolute !important;
+  top: 56px !important;
+}
+
+.code-lab-list .start-course {
+  height: 24px !important;
+  position: relative !important;
+  width: 24px !important;
+}
+
+.code-lab-list .level {
+  align-items: center;
+  display: inline-flex;
+  gap: 13px;
+  left: 136px;
+  position: absolute;
+  top: 121px;
+}
+
+.code-lab-list .text-wrapper-5 {
+  color: #a5aacf;
+  font-family: var(--label-xsmall-font-family);
+  font-size: var(--label-xsmall-font-size);
+  font-style: var(--label-xsmall-font-style);
+  font-weight: var(--label-xsmall-font-weight);
+  letter-spacing: var(--label-xsmall-letter-spacing);
+  line-height: var(--label-xsmall-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.code-lab-list .ellipse {
+  background-color: #8b90c1;
+  border-radius: 2px;
+  height: 4px;
+  position: relative;
+  width: 4px;
+}
+
+.code-lab-list .frame-2 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 2px;
+  position: relative;
+}
+
+.code-lab-list .rating-star-bar-4-0 {
+  height: 14px !important;
+  width: 70px !important;
+}
+
+.code-lab-list .rating-star-bar-instance {
+  height: 14px !important;
+  left: 56px !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 14px !important;
+}
+
+.code-lab-list .rating-star-bar-4-0-instance {
+  background-image: url(../../static/img/star-fill-1.svg) !important;
+  height: 14px !important;
+  left: 42px !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 14px !important;
+}
+
+.code-lab-list .design-component-instance-node {
+  background-image: url(../../static/img/star-fill-1.svg) !important;
+  height: 14px !important;
+  left: 28px !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 14px !important;
+}
+
+.code-lab-list .rating-star-bar-2 {
+  background-image: url(../../static/img/star-fill-1.svg) !important;
+  height: 14px !important;
+  left: 14px !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 14px !important;
+}
+
+.code-lab-list .rating-star-bar-3 {
+  background-image: url(../../static/img/star-fill-1.svg) !important;
+  height: 14px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 14px !important;
+}
+
+.code-lab-list .overlap-wrapper {
+  box-shadow: 0px -1px 0px #404376;
+  height: 164px;
+  left: 57px;
+  position: absolute;
+  top: 702px;
+  width: 961px;
+}
+
+.code-lab-list .div-wrapper {
+  box-shadow: 0px -1px 0px #404376;
+  height: 164px;
+  left: 56px;
+  position: absolute;
+  top: 363px;
+}
+
+.code-lab-list .list-2 {
+  box-shadow: 0px -1px 0px #404376;
+  height: 164px;
+  left: 55px;
+  position: absolute;
+  top: 186px;
+}

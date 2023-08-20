@@ -1,0 +1,51 @@
+:root {
+  --headings-heading-4-font-family: "PSTT Commons-DemiBold", Helvetica;
+  --headings-heading-4-font-size: 18px;
+  --headings-heading-4-font-style: normal;
+  --headings-heading-4-font-weight: 700;
+  --headings-heading-4-letter-spacing: 0px;
+  --headings-heading-4-line-height: 125%;
+  --label-xsmall-font-family: "PSTT Commons-Regular", Helvetica;
+  --label-xsmall-font-size: 12px;
+  --label-xsmall-font-style: normal;
+  --label-xsmall-font-weight: 400;
+  --label-xsmall-letter-spacing: 0.3px;
+  --label-xsmall-line-height: 16px;
+  --palette-blue10: rgba(0, 68, 107, 1);
+  --palette-yellow6: rgba(250, 208, 0, 1);
+  --pando-colors-default-surface: rgba(19, 15, 37, 1);
+  --pando-colors-default-text-medium: rgba(165, 170, 207, 1);
+  --pando-colors-default-text-weak: rgba(139, 144, 193, 1);
+  --paragraph-small-font-family: "PSTT Commons-Regular", Helvetica;
+  --paragraph-small-font-size: 14px;
+  --paragraph-small-font-style: normal;
+  --paragraph-small-font-weight: 400;
+  --paragraph-small-letter-spacing: 0.14px;
+  --paragraph-small-line-height: 24px;
+  --primary-actionbackground: rgba(0, 132, 189, 1);
+  --text-iconhigh-on-dark: rgba(255, 255, 255, 0.95);
+}
+
+/*
+
+To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+
+<body data-pando-colors-mode="dark">
+    <!-- the rest of your content -->
+</body>
+
+You can apply the theme on any DOM node, not just the `body`
+
+*/
+
+[data-pando-colors-mode="dark"] {
+  --pando-colors-default-surface: rgba(19, 15, 37, 1);
+  --pando-colors-default-text-medium: rgba(165, 170, 207, 1);
+  --pando-colors-default-text-weak: rgba(139, 144, 193, 1);
+}
+
+[data-pando-colors-mode="light"] {
+  --pando-colors-default-surface: rgba(255, 255, 255, 1);
+  --pando-colors-default-text-medium: rgba(78, 101, 131, 1);
+  --pando-colors-default-text-weak: rgba(84, 111, 146, 1);
+}

@@ -1,0 +1,28 @@
+.primary-medium-icon {
+  align-items: center;
+  background-color: var(--primary-actionbackground);
+  border-radius: 2px;
+  display: inline-flex;
+  gap: 8px;
+  height: 40px;
+  padding: 8px 12px;
+  position: relative;
+}
+
+.primary-medium-icon .label {
+  color: var(--text-iconhigh-on-dark);
+  font-family: "Gotham SSm-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.primary-medium-icon .placeholder-instance {
+  height: 24px !important;
+  position: relative !important;
+  width: 24px !important;
+}

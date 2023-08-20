@@ -1,15 +1,30 @@
 import React from "react";
-import { getSkeletonProps } from "@pluralsight/headless-styles";
 
-function ProfileSkeleton({ withDescription }) {
-  const textSkeletonProps = getSkeletonProps({ kind: "text" });
-
+function ProfileSkeleton() {
   return (
-    <div style={{ paddingInlineStart: "1rem", paddingInlineEnd: "1rem" }}>
-      <div {...textSkeletonProps} style={{ height: "40px" }}></div>
-      <div style={{ display: "flex", marginTop: "16px" }}>
-        <div {...textSkeletonProps} style={{ height: "40px" }} />
-      </div>
+    <div
+      style={{
+        backgroundColor: "#ffffff",
+        border: "1px solid hsl(203, 58%, 74%)",
+        borderRadius: "16px",
+        width: "72px",
+        height: "48px",
+        color: "#000000",
+        display: "flex", // Use Flexbox layout
+        justifyContent: "center", // Horizontally center the content
+        fontSize: "x-large",
+        marginLeft: "10px",
+      }}
+    >
+      <span style={{ animation: "blink 1.5s infinite" }}>.</span>
+      <span
+        style={{ animation: "blink 1.5s infinite", animationDelay: "0.5s" }}
+      >
+        .
+      </span>
+      <span style={{ animation: "blink 1.5s infinite", animationDelay: "1s" }}>
+        .
+      </span>
     </div>
   );
 }
