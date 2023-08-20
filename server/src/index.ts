@@ -298,12 +298,12 @@ app.get("/oncloseaddtohistory",async(req,res)=>{
   res.send("checking")
 })
 
-httpServer.listen(port, async() => {
+httpServer.listen(4000, async() => {
     connect
     seedData()
-  console.log(`Seamless learning listening on port http://localhost:${port}`);
+  console.log(`Seamless learning listening on port http://localhost:${4000}`);
 });
 
-apiServer.listen(apiport, () => {
+apiServer.listen(8080, () => {
   console.log("api server started")
 })
