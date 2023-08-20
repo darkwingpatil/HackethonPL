@@ -22,7 +22,7 @@ import { HumanMessage, ChatMessage, SystemMessage } from "langchain/schema";
 
 
 
-const connect = mongoose.connect(`mongodb://admin:root@localhost:27017/seamless_learning?authSource=admin`)
+const connect = mongoose.connect("mongodb+srv://App123:Darkwing123@cluster0.56dvjei.mongodb.net/seamless-learning?retryWrites=true&w=majority")
 import { getUserData, addDatatoDb, initial_insert_ChatConverstation, checkUserChatExists, update_current_conversation, get_user_chat_history, feedback_analytics, get_code_lab_data, get_code_lab_details,adding_into_user_history_langchain } from "./dataHandler"
 import { seedData} from "./parser"
 import { UUID } from "crypto";
