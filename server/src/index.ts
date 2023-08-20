@@ -19,16 +19,16 @@ import { ChatMessageHistory } from "langchain/memory";
 import { BufferMemory } from "langchain/memory";
 
 import { HumanMessage, ChatMessage, SystemMessage } from "langchain/schema";
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 
-
-const connect = mongoose.connect("mongodb+srv://App123:Darkwing123@cluster0.56dvjei.mongodb.net/seamless-learning?retryWrites=true&w=majority")
+const connect = mongoose.connect(process.env.MONGO_ATLAS?process.env.MONGO_ATLAS:"")
 import { getUserData, addDatatoDb, initial_insert_ChatConverstation, checkUserChatExists, update_current_conversation, get_user_chat_history, feedback_analytics, get_code_lab_data, get_code_lab_details,adding_into_user_history_langchain } from "./dataHandler"
 import { seedData} from "./parser"
 import { UUID } from "crypto";
 import { Timestamp } from "typeorm";
 
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+
 
 const app = express()
 const apiServer = express()
@@ -74,17 +74,25 @@ export type Messages={
 
 const initalQuery = async (title:string, description:string) => {
 
-  const chat = new ChatOpenAI({ openAIApiKey:"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",temperature: 0 });
+  try{
+    const chat = new ChatOpenAI({ openAIApiKey:process.env.OPEN_AI_API_KEY,temperature: 0 });
 
-  const result = await chat.predictMessages([
-      new HumanMessage(`Your task is to find top topics from a text.
-      Make each item one or two words long.
-      Format your response as a list of items separated by commas.
-      Text: "${title}. ${description}"`)
-    ]);
+    const result = await chat.predictMessages([
+        new HumanMessage(`Your task is to find top topics from a text.
+        Make each item one or two words long.
+        Format your response as a list of items separated by commas.
+        Text: "${title}. ${description}"`)
+      ]);
+  
+      console.log(result,"ss")
+      return result.content
+  }
+  catch(e:any)
+  {
+    console.log(e.message)
+  }
 
-    console.log(result,"ss")
-    return result.content
+
 }
 
 // maintaing the context here
@@ -131,6 +139,11 @@ const settingupthecontext=async(courseId:string,userHandle:string)=>{
     }
 
     const listofOutput = await initalQuery(getTopicName.CODELABTITLE, getTopicName.COURSEDESCRIPTION)
+
+    if(!listofOutput || listofOutput.length<1)
+    {
+      return 
+    }
     console.log('logging what can it return',listofOutput)
 
     const list = listofOutput.split(",")
@@ -142,7 +155,7 @@ const settingupthecontext=async(courseId:string,userHandle:string)=>{
 }
 
 
-const chat = new ChatOpenAI({ openAIApiKey: "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", temperature: 0 });
+const chat = new ChatOpenAI({ openAIApiKey: process.env.OPEN_AI_API_KEY, temperature: 0 });
 
 const pastMessages = new ChatMessageHistory();
 
@@ -298,12 +311,14 @@ app.get("/oncloseaddtohistory",async(req,res)=>{
   res.send("checking")
 })
 
-httpServer.listen(4000, async() => {
+httpServer.listen(port, async() => {
     connect
     seedData()
-  console.log(`Seamless learning listening on port http://localhost:${4000}`);
+  console.log(`Seamless learning listening on port http://localhost:${port}`);
 });
 
-apiServer.listen(8080, () => {
+apiServer.listen(apiport, () => {
   console.log("api server started")
 })
+
+
